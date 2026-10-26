@@ -15,6 +15,39 @@ const worlds=[
 ];
 const game=new Phaser.Game({type:Phaser.AUTO,parent:'game',backgroundColor:'#a5e9ff',scale:{mode:Phaser.Scale.FIT,autoCenter:Phaser.Scale.CENTER,width:WIDTH,height:HEIGHT},scene:{preload,create}});
 let scene,ui=[],active='map',starsText,feedback,animal,actionCount=0,missionCount=0,choiceButtons=[],state={};
+let soundOn=true,audioContext=null;
+try{soundOn=localStorage.getItem('mete-sound')!=='off'}catch(e){}
+function playTone(type='tap'){
+ if(!soundOn)return;
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  if(!audioContext)audioContext=new AC();
+  if(audioContext.state==='suspended')audioContext.resume();
+  const now=audioContext.currentTime;
+  const notes=type==='win'?[523,659,784,1046]:type==='wrong'?[310,260]:type==='care'?[440,550,660]:[560];
+  notes.forEach((hz,i)=>{
+   const osc=audioContext.createOscillator(),gain=audioContext.createGain();
+   osc.type=type==='wrong'?'triangle':'sine';
+   osc.frequency.setValueAtTime(hz,now+i*.105);
+   gain.gain.setValueAtTime(.0001,now+i*.105);
+   gain.gain.exponentialRampToValueAtTime(.09,now+i*.105+.018);
+   gain.gain.exponentialRampToValueAtTime(.0001,now+i*.105+.19);
+   osc.connect(gain);gain.connect(audioContext.destination);
+   osc.start(now+i*.105);osc.stop(now+i*.105+.2);
+  });
+ }catch(e){}
+}
+function soundControl(){
+ const x=46,y=35;
+ rect(x,y,64,51,0xffffff,17,.93);
+ const t=text(x,y,soundOn?'🔊':'🔇',26,'#315a72');
+ add(scene.add.zone(x,y,64,52).setInteractive({useHandCursor:true})).on('pointerdown',()=>{
+ soundOn=!soundOn;t.setText(soundOn?'🔊':'🔇');
+ try{localStorage.setItem('mete-sound',soundOn?'on':'off')}catch(e){}
+ if(soundOn)playTone('tap');
+ });
+}
 function preload(){this.load.svg('cow','assets/cow-character.svg',{width:480,height:480});this.load.svg('dolphin','assets/dolphin-character.svg',{width:480,height:480});this.load.svg('rabbit','assets/rabbit-character.svg',{width:480,height:480});this.load.svg('fox','assets/fox-character.svg',{width:480,height:480});this.load.svg('puppy','assets/puppy.svg',{width:560,height:560});this.load.svg('salon','assets/salon.svg',{width:960,height:600})}
 function add(o){ui.push(o);return o}
 function clear(){ui.forEach(o=>{if(o&&o.active)o.destroy()});ui=[];choiceButtons=[];animal=null}
@@ -23,9 +56,9 @@ function stroke(x,y,w,h,c,r=20,width=4){let g=scene.add.graphics();g.lineStyle(w
 function ellipse(x,y,w,h,c,a=1){return add(scene.add.ellipse(x,y,w,h,c,a))}
 function text(x,y,str,size=24,color=C.ink){return add(scene.add.text(x,y,str,{fontFamily:'Arial, sans-serif',fontSize:size+'px',fontStyle:'bold',color,align:'center',stroke:'#fff8e9',strokeThickness:size>25?4:2,wordWrap:{width:880}}).setOrigin(.5))}
 function emoji(x,y,s,size=48){return text(x,y,s,size)}
-function button(x,y,w,h,color,icon,title,fn){rect(x+3,y+6,w,h,0x8c5a54,19,.25);rect(x,y,w,h,color,19);stroke(x,y,w,h,0xffffff,19,5);let a=text(x,y-13,icon,34),b=text(x,y+28,title,18,'#234961');const zone=add(scene.add.zone(x,y,w,h).setInteractive({useHandCursor:true}));zone.on('pointerdown',()=>{scene.tweens.add({targets:[a,b],scale:.91,duration:95,yoyo:true});fn()});return zone}
-function head(title){rect(480,35,960,70,0xffffff,20,.77);text(455,33,title,30,'#19708b');rect(854,34,165,52,0xffffff,19,.94);starsText=text(854,34,'⭐ '+progress.stars,25,'#a36a20')}
-function award(key,amount=1){progress.stars+=amount;progress.completed[key]=(progress.completed[key]||0)+1;save();if(starsText&&starsText.active)starsText.setText('⭐ '+progress.stars)}
+function button(x,y,w,h,color,icon,title,fn){rect(x+3,y+6,w,h,0x8c5a54,19,.25);rect(x,y,w,h,color,19);stroke(x,y,w,h,0xffffff,19,5);let a=text(x,y-13,icon,34),b=text(x,y+28,title,18,'#234961');const zone=add(scene.add.zone(x,y,w,h).setInteractive({useHandCursor:true}));zone.on('pointerdown',()=>{scene.tweens.add({targets:[a,b],scale:.91,duration:95,yoyo:true});playTone('tap');fn()});return zone}
+function head(title){rect(480,35,960,70,0xffffff,20,.77);text(455,33,title,30,'#19708b');rect(854,34,165,52,0xffffff,19,.94);starsText=text(854,34,'⭐ '+progress.stars,25,'#a36a20');soundControl()}
+function award(key,amount=1){playTone('win');progress.stars+=amount;progress.completed[key]=(progress.completed[key]||0)+1;save();if(starsText&&starsText.active)starsText.setText('⭐ '+progress.stars)}
 function toast(str){if(feedback&&feedback.active)feedback.destroy();feedback=text(480,552,str,21,'#875438');scene.tweens.add({targets:feedback,alpha:0,delay:1500,duration:700})}
 function pop(x,y,icon='✨',n=13){for(let i=0;i<n;i++){let e=emoji(x+Phaser.Math.Between(-55,55),y+Phaser.Math.Between(-35,35),icon,Phaser.Math.Between(19,32));scene.tweens.add({targets:e,x:e.x+Phaser.Math.Between(-95,95),y:e.y-Phaser.Math.Between(60,155),alpha:0,duration:Phaser.Math.Between(750,1300),onComplete:()=>e.destroy()})}}
 // Layered illustrated environments: custom vector scenery, animated clouds,
@@ -91,7 +124,7 @@ if(kind==='party'){if(state.wash&&state.feed&&state.love){award('pet');toast('Ha
 if(state[kind]){toast('Bu görevi zaten yaptın!');return}
 state[kind]=true;
 let icons={wash:'🫧',feed:'🥕',love:'💗'},msgs={wash:'Tertemiz oldu!',feed:'Afiyet olsun!',love:'Çok mutlu oldu!'};
-toast(msgs[kind]);pop(480,300,icons[kind],kind==='wash'?25:16);
+playTone('care');toast(msgs[kind]);pop(480,300,icons[kind],kind==='wash'?25:16);
 scene.tweens.add({targets:animal,angle:5,duration:160,repeat:2,yoyo:true,onComplete:()=>animal.setAngle(0)});
 }
 // Three-round learning adventures: each world presents fresh questions,
@@ -127,8 +160,8 @@ text(480,331,data.q,27,'#774e39');
 text(480,112,'GÖREV '+(round+1)+' / 3',22,'#6b7750');
 data.opts.forEach((o,i)=>button(240+i*240,429,205,104,[0xffc16b,0x8ddac7,0xc5b1f7][i],o[0],o[1],()=>{
 if(state.quizBusy)return;
-if(i!==data.right){toast('Bir daha dene! 🌟');return}
-state.quizBusy=true;pop(480,300,'⭐',14);
+if(i!==data.right){playTone('wrong');toast('Bir daha dene! 🌟');return}
+state.quizBusy=true;playTone('care');pop(480,300,'⭐',14);
 if(round===2){award(id);toast('Üç görevi de başardın! ⭐');scene.time.delayedCall(1200,()=>{if(active===quizTitles[id])showMap()})}
 else{toast('Doğru bildin! 🎉');scene.time.delayedCall(950,()=>{if(active===quizTitles[id])quizWorld(id,round+1)})}
 }));
