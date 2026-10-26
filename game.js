@@ -94,7 +94,47 @@ let icons={wash:'🫧',feed:'🥕',love:'💗'},msgs={wash:'Tertemiz oldu!',feed
 toast(msgs[kind]);pop(480,300,icons[kind],kind==='wash'?25:16);
 scene.tweens.add({targets:animal,angle:5,duration:160,repeat:2,yoyo:true,onComplete:()=>animal.setAngle(0)});
 }
-function farmWorld(){frame('🐮 ÇİFTLİK ARKADAŞLARIMIZ');emoji(480,205,'🏡',112);text(480,320,'Hangi hayvan “MÖÖ” der?',28,'#774e39');const opts=[['🐮','İNEK'],['🐔','TAVUK'],['🐑','KOYUN']];opts.forEach((o,i)=>button(240+i*240,423,205,105,[0xffc16b,0x8ddac7,0xc5b1f7][i],o[0],o[1],()=>{if(i===0){award('farm');toast('Doğru! İnek möö der!');pop(480,320,'⭐')}else toast('Bir daha deneyelim!')}))}
-function forestWorld(){frame('🦊 ORMAN KAŞİFLERİ');emoji(480,205,'🌳',115);text(480,320,'Hangi hayvan ormanda yaşar?',28,'#774e39');const opts=[['🦊','TİLKİ'],['🐬','YUNUS'],['🐠','BALIK']];opts.forEach((o,i)=>button(240+i*240,423,205,105,[0x8ed6a2,0x7bc9f3,0xf8be83][i],o[0],o[1],()=>{if(i===0){award('forest');toast('Harika! Tilkiyi buldun!');pop(480,315,'🍃')}else toast('Tekrar düşün!')}))}
-function seaWorld(){frame('🐬 DENİZ DÜNYASI');ellipse(480,255,600,260,0x5dc9e7,.78);emoji(480,236,'🐬',105);text(480,350,'Denizde yaşayan canlıyı seç!',27,'#276e85');const opts=[['🐬','YUNUS'],['🐮','İNEK'],['🐓','HOROZ']];opts.forEach((o,i)=>button(240+i*240,430,205,100,[0x61cdeb,0xffc780,0xa6dba1][i],o[0],o[1],()=>{if(i===0){award('sea');toast('Doğru! Yunuslar denizde yaşar!');pop(480,265,'🫧')}else toast('Bir daha dene!')}))}
-function vetWorld(){frame('🐰 VETERİNER KLİNİĞİ');emoji(480,218,'🐰',108);text(480,322,'Tavşanı dinlemek için ne kullanırız?',25,'#774e39');const opts=[['🩺','STETOSKOP'],['🧼','SABUN'],['🥕','HAVUÇ']];opts.forEach((o,i)=>button(240+i*240,427,210,103,[0x88c7ef,0xffa7c5,0xffd08c][i],o[0],o[1],()=>{if(i===0){award('vet');toast('Aferin! Kalp sesini dinledin!');pop(480,280,'💗')}else toast('Bu kez olmadı, tekrar dene!')}))}
+// Three-round learning adventures: each world presents fresh questions,
+// celebrates correct answers and awards a star only after finishing.
+const questionSets={
+farm:[
+{q:'Hangi hayvan “MÖÖ” der?',opts:[['🐮','İNEK'],['🐔','TAVUK'],['🐑','KOYUN']],right:0},
+{q:'Hangi hayvan yumurtlar?',opts:[['🐴','AT'],['🐔','TAVUK'],['🐄','İNEK']],right:1},
+{q:'Hangi hayvan “MEE” der?',opts:[['🐤','CİVCİV'],['🐷','DOMUZ'],['🐑','KOYUN']],right:2}
+],
+forest:[
+{q:'Hangi hayvan ormanda yaşar?',opts:[['🦊','TİLKİ'],['🐬','YUNUS'],['🐠','BALIK']],right:0},
+{q:'Hangi hayvan ağaçlara tırmanır?',opts:[['🐳','BALİNA'],['🐿️','SİNCAP'],['🐙','AHTAPOT']],right:1},
+{q:'Hangisi orman kuşudur?',opts:[['🦀','YENGEÇ'],['🐡','BALON BALIĞI'],['🦉','BAYKUŞ']],right:2}
+],
+sea:[
+{q:'Denizde yaşayan canlıyı seç!',opts:[['🐬','YUNUS'],['🐮','İNEK'],['🐓','HOROZ']],right:0},
+{q:'Hangi hayvanın sekiz kolu vardır?',opts:[['🐟','BALIK'],['🐙','AHTAPOT'],['🦆','ÖRDEK']],right:1},
+{q:'Denizde kabuğuyla gezen hangisi?',opts:[['🦊','TİLKİ'],['🐥','CİVCİV'],['🐢','KAPLUMBAĞA']],right:2}
+],
+vet:[
+{q:'Tavşanın kalbini neyle dinleriz?',opts:[['🩺','STETOSKOP'],['🧼','SABUN'],['🥕','HAVUÇ']],right:0},
+{q:'Ellerimizi temizlemek için ne kullanırız?',opts:[['🧸','OYUNCAK'],['🧼','SABUN'],['🎈','BALON']],right:1},
+{q:'Tavşan hangi yiyeceği sever?',opts:[['🍭','ŞEKER'],['🍫','ÇİKOLATA'],['🥕','HAVUÇ']],right:2}
+]};
+const quizTitles={farm:'🐮 ÇİFTLİK ARKADAŞLARIMIZ',forest:'🦊 ORMAN KAŞİFLERİ',sea:'🐬 DENİZ DÜNYASI',vet:'🐰 VETERİNER KLİNİĞİ'};
+const quizMascots={farm:['🐮','🐔','🐑'],forest:['🦊','🐿️','🦉'],sea:['🐬','🐙','🐢'],vet:['🐰','🩺','🥕']};
+function quizWorld(id,round=0){
+frame(quizTitles[id]);const data=questionSets[id][round];const theme={farm:0xffe4a2,forest:0xbcebb6,sea:0xa5e9f4,vet:0xf3d5fa}[id];
+ellipse(480,240,555,255,theme,.92);
+for(let i=0;i<3;i++)emoji(390+i*90,208,quizMascots[id][i],i===round?95:58);
+text(480,331,data.q,27,'#774e39');
+text(480,112,'GÖREV '+(round+1)+' / 3',22,'#6b7750');
+data.opts.forEach((o,i)=>button(240+i*240,429,205,104,[0xffc16b,0x8ddac7,0xc5b1f7][i],o[0],o[1],()=>{
+if(state.quizBusy)return;
+if(i!==data.right){toast('Bir daha dene! 🌟');return}
+state.quizBusy=true;pop(480,300,'⭐',14);
+if(round===2){award(id);toast('Üç görevi de başardın! ⭐');scene.time.delayedCall(1200,()=>{if(active===quizTitles[id])showMap()})}
+else{toast('Doğru bildin! 🎉');scene.time.delayedCall(950,()=>{if(active===quizTitles[id])quizWorld(id,round+1)})}
+}));
+state.quizBusy=false;
+}
+function farmWorld(){quizWorld('farm')}
+function forestWorld(){quizWorld('forest')}
+function seaWorld(){quizWorld('sea')}
+function vetWorld(){quizWorld('vet')}
