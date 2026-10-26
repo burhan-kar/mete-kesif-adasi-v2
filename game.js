@@ -36,13 +36,41 @@ for(let i=0;i<worlds.length;i++){const w=worlds[i];ellipse(w.x,w.y+46,194,50,0x3
 text(480,583,'Bir dünyaya dokun ve oyuna başla!',18,'#286c78')}
 function openWorld(id){if(id==='pet')petWorld();if(id==='farm')farmWorld();if(id==='forest')forestWorld();if(id==='sea')seaWorld();if(id==='vet')vetWorld()}
 function frame(title){clear();active=title;backdrop();head(title);button(78,105,115,58,0x65c7ef,'⬅️','HARİTA',showMap);rect(480,530,610,76,0xffffff,20,.9)}
-function petWorld(){frame('🐾 HAYVAN BAKIM MERKEZİ');let bg=add(scene.add.image(480,310,'salon').setDisplaySize(960,520));bg.setDepth(-1);animal=add(scene.add.image(480,306,'puppy').setDisplaySize(335,335));scene.tweens.add({targets:animal,y:300,duration:1150,repeat:-1,yoyo:true});state={wash:false,feed:false,love:false};missionCount=0;
-button(110,268,160,93,0x59d4eb,'🧼','YIKA',()=>petAct('wash'));
-button(850,268,160,93,0xffc46b,'🥕','BESLE',()=>petAct('feed'));
-button(110,397,160,93,0xffa3c8,'💗','SEV',()=>petAct('love'));
-button(850,397,160,93,0xb4a0f5,'🎉','KUTLA',()=>petAct('party'));
-text(480,526,'Köpeğimizin bakımını tamamla!',20,'#8b563d');animal.setInteractive({useHandCursor:true}).on('pointerdown',()=>petAct('love'))}
-function petAct(kind){if(kind==='party'){if(state.wash&&state.feed&&state.love){award('pet');toast('Harikasın! Köpeğimiz çok mutlu!');pop(480,290,'⭐',22);state={wash:false,feed:false,love:false}}else toast('Önce yıka, besle ve sev!');return}state[kind]=true;let icons={wash:'🫧',feed:'🥕',love:'💗'},msgs={wash:'Tertemiz oldu!',feed:'Afiyet olsun!',love:'Çok mutlu oldu!'};toast(msgs[kind]);pop(480,300,icons[kind],16);scene.tweens.add({targets:animal,angle:5,duration:160,repeat:2,yoyo:true,onComplete:()=>animal.setAngle(0)})}
+function petWorld(){
+frame('🐾 HAYVAN BAKIM MERKEZİ');
+const bg=add(scene.add.image(480,310,'salon').setDisplaySize(960,520));bg.setDepth(-1);
+animal=add(scene.add.image(480,296,'puppy').setDisplaySize(335,335));
+scene.tweens.add({targets:animal,y:291,duration:1150,repeat:-1,yoyo:true});
+state={wash:false,feed:false,love:false};missionCount=0;
+text(480,112,'Eşyaları köpeğin üzerine sürükle!',22,'#7c4b31');
+const makeTool=(x,y,symbol,title,color,kind)=>{
+rect(x,y+3,152,110,color,22);stroke(x,y+3,152,110,0xffffff,22,5);
+text(x,y+34,title,19,'#35536b');
+const tool=emoji(x,y-16,symbol,43);
+tool.setInteractive({useHandCursor:true,draggable:true});
+tool.setData('originX',x);tool.setData('originY',y-16);
+scene.input.setDraggable(tool);
+tool.on('drag',(pointer,dragX,dragY)=>{tool.x=dragX;tool.y=dragY;tool.setScale(1.22)});
+tool.on('dragend',()=>{const hit=Math.abs(tool.x-animal.x)<175&&Math.abs(tool.y-animal.y)<175;
+if(hit)petAct(kind);
+scene.tweens.add({targets:tool,x:x,y:y-16,scale:1,duration:280,ease:'Back.easeOut'});
+});
+};
+makeTool(114,255,'🧽','SÜNGER',0x65d4e6,'wash');
+makeTool(846,255,'🥕','MAMA',0xffc46b,'feed');
+makeTool(114,396,'💗','SEVGİ',0xffa3c8,'love');
+button(846,396,160,93,0xb4a0f5,'🎉','KUTLA',()=>petAct('party'));
+text(480,525,'Üç bakım görevini tamamla ve kutla!',19,'#8b563d');
+animal.setInteractive({useHandCursor:true}).on('pointerdown',()=>petAct('love'));
+}
+function petAct(kind){
+if(kind==='party'){if(state.wash&&state.feed&&state.love){award('pet');toast('Harikasın Mete! Köpeğimiz çok mutlu!');pop(480,290,'⭐',22);state={wash:false,feed:false,love:false}}else toast('Önce yıka, besle ve sev!');return}
+if(state[kind]){toast('Bu görevi zaten yaptın!');return}
+state[kind]=true;
+let icons={wash:'🫧',feed:'🥕',love:'💗'},msgs={wash:'Tertemiz oldu!',feed:'Afiyet olsun!',love:'Çok mutlu oldu!'};
+toast(msgs[kind]);pop(480,300,icons[kind],kind==='wash'?25:16);
+scene.tweens.add({targets:animal,angle:5,duration:160,repeat:2,yoyo:true,onComplete:()=>animal.setAngle(0)});
+}
 function farmWorld(){frame('🐮 ÇİFTLİK ARKADAŞLARIMIZ');emoji(480,205,'🏡',112);text(480,320,'Hangi hayvan “MÖÖ” der?',28,'#774e39');const opts=[['🐮','İNEK'],['🐔','TAVUK'],['🐑','KOYUN']];opts.forEach((o,i)=>button(240+i*240,423,205,105,[0xffc16b,0x8ddac7,0xc5b1f7][i],o[0],o[1],()=>{if(i===0){award('farm');toast('Doğru! İnek möö der!');pop(480,320,'⭐')}else toast('Bir daha deneyelim!')}))}
 function forestWorld(){frame('🦊 ORMAN KAŞİFLERİ');emoji(480,205,'🌳',115);text(480,320,'Hangi hayvan ormanda yaşar?',28,'#774e39');const opts=[['🦊','TİLKİ'],['🐬','YUNUS'],['🐠','BALIK']];opts.forEach((o,i)=>button(240+i*240,423,205,105,[0x8ed6a2,0x7bc9f3,0xf8be83][i],o[0],o[1],()=>{if(i===0){award('forest');toast('Harika! Tilkiyi buldun!');pop(480,315,'🍃')}else toast('Tekrar düşün!')}))}
 function seaWorld(){frame('🐬 DENİZ DÜNYASI');ellipse(480,255,600,260,0x5dc9e7,.78);emoji(480,236,'🐬',105);text(480,350,'Denizde yaşayan canlıyı seç!',27,'#276e85');const opts=[['🐬','YUNUS'],['🐮','İNEK'],['🐓','HOROZ']];opts.forEach((o,i)=>button(240+i*240,430,205,100,[0x61cdeb,0xffc780,0xa6dba1][i],o[0],o[1],()=>{if(i===0){award('sea');toast('Doğru! Yunuslar denizde yaşar!');pop(480,265,'🫧')}else toast('Bir daha dene!')}))}
