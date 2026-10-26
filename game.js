@@ -28,7 +28,30 @@ function head(title){rect(480,35,960,70,0xffffff,20,.77);text(455,33,title,30,'#
 function award(key,amount=1){progress.stars+=amount;progress.completed[key]=(progress.completed[key]||0)+1;save();if(starsText&&starsText.active)starsText.setText('⭐ '+progress.stars)}
 function toast(str){if(feedback&&feedback.active)feedback.destroy();feedback=text(480,552,str,21,'#875438');scene.tweens.add({targets:feedback,alpha:0,delay:1500,duration:700})}
 function pop(x,y,icon='✨',n=13){for(let i=0;i<n;i++){let e=emoji(x+Phaser.Math.Between(-55,55),y+Phaser.Math.Between(-35,35),icon,Phaser.Math.Between(19,32));scene.tweens.add({targets:e,x:e.x+Phaser.Math.Between(-95,95),y:e.y-Phaser.Math.Between(60,155),alpha:0,duration:Phaser.Math.Between(750,1300),onComplete:()=>e.destroy()})}}
-function backdrop(){rect(480,300,960,600,0xb2eafa,0);ellipse(480,590,1120,420,0x74cfa0);ellipse(480,530,900,235,0x9ce0a5);for(let i=0;i<9;i++){const x=(i*121+65)%960;ellipse(x,105+(i%3)*30,110,30,0xffffff,.38)}}
+// Layered illustrated environments: custom vector scenery, animated clouds,
+// ornamental foliage and island landmarks. All graphics generated at runtime.
+function artShape(draw){const g=scene.add.graphics();draw(g);add(g);return g}
+function artCloud(x,y,scale=1){
+const g=artShape(p=>{p.fillStyle(0x8abbd1,.22);p.fillEllipse(5,13,148,39);p.fillStyle(0xffffff,.94);p.fillEllipse(0,0,130,39);p.fillCircle(-39,-10,28);p.fillCircle(-5,-22,36);p.fillCircle(36,-12,28)});
+g.setPosition(x,y).setScale(scale);scene.tweens.add({targets:g,x:x+30,duration:4200+Math.random()*1700,yoyo:true,repeat:-1,ease:'Sine.easeInOut'});
+}
+function artPalm(x,y,scale=1){
+const g=artShape(p=>{p.lineStyle(15,0x9b6744,1);p.beginPath();p.moveTo(0,80);p.lineTo(10,-25);p.strokePath();p.lineStyle(4,0xd6a16e,1);for(let i=0;i<5;i++){p.beginPath();p.moveTo(0,50-i*17);p.lineTo(9,46-i*17);p.strokePath()}for(let i=0;i<7;i++){const a=(-Math.PI*.93)+i*Math.PI/6;p.fillStyle(i%2?0x4abf79:0x2eaa75);p.fillEllipse(10+Math.cos(a)*43,-26+Math.sin(a)*28,92,23);p.fillStyle(0x76db89,.45);p.fillEllipse(10+Math.cos(a)*40,-29+Math.sin(a)*25,65,7)}p.fillStyle(0xe1a263);p.fillCircle(10,-26,10)});g.setPosition(x,y).setScale(scale);
+}
+function artFlower(x,y,c=0xffa8c9,s=1){
+const g=artShape(p=>{p.lineStyle(3,0x368c4f);p.lineBetween(0,7,0,20);for(let i=0;i<5;i++){const a=i*Math.PI*2/5;p.fillStyle(c);p.fillCircle(Math.cos(a)*7,Math.sin(a)*7,6)}p.fillStyle(0xffd75a);p.fillCircle(0,0,5)});g.setPosition(x,y).setScale(s);
+}
+function artHill(x,y,w,h,color){artShape(p=>{p.fillStyle(color);p.fillEllipse(x,y,w,h);p.fillStyle(0xffffff,.10);p.fillEllipse(x-35,y-12,w*.75,h*.43)})}
+function backdrop(){
+rect(480,300,960,600,0x9fe6fa,0);
+artShape(p=>{p.fillStyle(0xffefaa,.45);p.fillCircle(795,88,92);p.fillStyle(0xfff2b1);p.fillCircle(795,88,57);p.fillStyle(0x48c7e0);p.fillRect(0,365,960,235);p.fillStyle(0x78dfe9,.45);for(let i=0;i<15;i++)p.fillEllipse(i*76,410+(i%3)*34,84,7)});
+artCloud(125,104,.9);artCloud(450,78,.75);artCloud(775,148,.64);
+artHill(175,375,540,230,0x69c9a0);artHill(755,382,590,235,0x77d19b);
+artHill(475,485,1060,340,0xf2d58d);artHill(475,463,1015,325,0x80d48b);
+artHill(480,483,885,275,0x9bdf9c);
+artPalm(45,285,.9);artPalm(902,303,.82);
+for(let i=0;i<26;i++){const x=75+(i*137)%810,y=340+(i*71)%190;artFlower(x,y,[0xff9fbd,0xffe18a,0xe0a6f5,0xffffff][i%4],.65+(i%3)*.18)}
+}
 function create(){scene=this;showMap()}
 function showMap(){clear();active='map';backdrop();ellipse(480,395,830,360,0xeed18b);ellipse(480,380,800,340,0x8cda85);ellipse(480,390,730,260,0xb2e59c);ellipse(485,570,890,120,0x31c9e0,.65);
 head("METE'NİN KEŞİF ADASI 2.0");text(480,89,'Bugün hangi dünyayı keşfedeceğiz?',22,'#5a7152');
