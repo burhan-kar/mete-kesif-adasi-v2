@@ -15,7 +15,7 @@ const worlds=[
 ];
 const game=new Phaser.Game({type:Phaser.AUTO,parent:'game',backgroundColor:'#a5e9ff',scale:{mode:Phaser.Scale.FIT,autoCenter:Phaser.Scale.CENTER,width:WIDTH,height:HEIGHT},scene:{preload,create}});
 let scene,ui=[],active='map',starsText,feedback,animal,actionCount=0,missionCount=0,choiceButtons=[],state={};
-function preload(){this.load.svg('rabbit','assets/rabbit-character.svg',{width:480,height:480});this.load.svg('fox','assets/fox-character.svg',{width:480,height:480});this.load.svg('puppy','assets/puppy.svg',{width:560,height:560});this.load.svg('salon','assets/salon.svg',{width:960,height:600})}
+function preload(){this.load.svg('cow','assets/cow-character.svg',{width:480,height:480});this.load.svg('dolphin','assets/dolphin-character.svg',{width:480,height:480});this.load.svg('rabbit','assets/rabbit-character.svg',{width:480,height:480});this.load.svg('fox','assets/fox-character.svg',{width:480,height:480});this.load.svg('puppy','assets/puppy.svg',{width:560,height:560});this.load.svg('salon','assets/salon.svg',{width:960,height:600})}
 function add(o){ui.push(o);return o}
 function clear(){ui.forEach(o=>{if(o&&o.active)o.destroy()});ui=[];choiceButtons=[];animal=null}
 function rect(x,y,w,h,c,r=20,alpha=1){let g=scene.add.graphics();g.fillStyle(c,alpha);g.fillRoundedRect(x-w/2,y-h/2,w,h,r);add(g);return g}
@@ -122,7 +122,7 @@ const quizMascots={farm:['🐮','🐔','🐑'],forest:['🦊','🐿️','🦉'],
 function quizWorld(id,round=0){
 frame(quizTitles[id]);const data=questionSets[id][round];const theme={farm:0xffe4a2,forest:0xbcebb6,sea:0xa5e9f4,vet:0xf3d5fa}[id];
 ellipse(480,240,555,255,theme,.92);
-if(id==='forest'||id==='vet'){const mascot=add(scene.add.image(480,217,id==='forest'?'fox':'rabbit').setDisplaySize(230,230));scene.tweens.add({targets:mascot,y:210,angle:3,duration:1150,repeat:-1,yoyo:true,ease:'Sine.easeInOut'});}else{for(let i=0;i<3;i++)emoji(390+i*90,208,quizMascots[id][i],i===round?95:58);}
+const mascotKey={farm:'cow',forest:'fox',sea:'dolphin',vet:'rabbit'}[id];const mascot=add(scene.add.image(480,217,mascotKey).setDisplaySize(230,230));scene.tweens.add({targets:mascot,y:210,angle:3,duration:1150,repeat:-1,yoyo:true,ease:'Sine.easeInOut'});
 text(480,331,data.q,27,'#774e39');
 text(480,112,'GÖREV '+(round+1)+' / 3',22,'#6b7750');
 data.opts.forEach((o,i)=>button(240+i*240,429,205,104,[0xffc16b,0x8ddac7,0xc5b1f7][i],o[0],o[1],()=>{
