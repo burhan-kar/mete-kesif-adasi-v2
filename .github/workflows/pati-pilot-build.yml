@@ -1,0 +1,44 @@
+name: Pati free GLB 3D pilot build
+on:
+  push:
+    branches:
+      - studio/p0-pati-four-view-concept-2026-10-28
+    paths:
+      - "build-payload/generate-pati-glb.mjs.gz.b64"
+      - ".github/workflows/pati-pilot-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-original-glb:
+    if: "!contains(github.event.head_commit.message, '[skip pilot build]')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Decode deterministic original Node.js generator
+        run: |
+          base64 -d build-payload/generate-pati-glb.mjs.gz.b64 | gzip -d > scripts/generate-pati-glb.mjs
+          node --check scripts/generate-pati-glb.mjs
+      - name: Generate real skinned, textured, animated 3D GLB
+        run: node scripts/generate-pati-glb.mjs
+      - name: Test GLB quality and existing concept and pilot syntax
+        run: |
+          node scripts/validate-pati-glb.mjs
+          node scripts/validate-pati-concept.mjs
+          node --check pilot-3d/pilot.js
+          test -s assets/characters/pati/pati_v01.glb
+          test -f game.js
+          test -f index.html
+      - name: Commit generated 3D model and reproducible generator to feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/generate-pati-glb.mjs assets/characters/pati/pati_v01.glb
+          git rm build-payload/generate-pati-glb.mjs.gz.b64
+          git commit -m "build(pati): commit original GLB with skin, six clips and source [skip pilot build]"
+          git push origin "HEAD:${GITHUB_REF#refs/heads/}"
