@@ -1,5 +1,5 @@
 # METE'NİN KEŞİF ADASI 3.0 — PROFESYONEL ÜRETİM YOL HARİTASI
-Son güncelleme: 2026-10-28 | Durum: PLAN ONAY İÇİN HAZIR / PİLOT HAZIRLIĞI
+Son güncelleme: 2026-10-28 | Durum: FAZ 2 TEKNİK GLB/THREE.JS PİLOT TESTTE (main v2 oyunu korunuyor)
 
 ## Hedef
 4–7 yaşa uygun, Türkçe seslendirmeli, kaliteli, orijinal karakterli, çocuk merkezli bir keşif oyunu. Referans kalite: Lingokids kadar akıcı ve özenli bir deneyim; karakter, logo, arayüz ve sesler özgün olacaktır. Gerçek 3D karakterlerle animasyon hedeflenir; statik konsept görselleri gerçek 3D model sayılmaz.
@@ -32,10 +32,11 @@ Son güncelleme: 2026-10-28 | Durum: PLAN ONAY İÇİN HAZIR / PİLOT HAZIRLIĞI
 - [ ] Sanat yönetimi onayı: oranlar, renk, okunabilirlik ve telif
 **Kabul:** 5 maskot arasında güçlü görsel tutarlılık ve orijinal marka dili.
 
-### FAZ 2 — Gerçek 3D pilot [PLANLANDI]
-- [ ] Köpeğin GLB/GLTF modeli (yüklenebilir, kemikli/rigli, materyalli)
-- [ ] Idle, mutlu, yıkanma, beslenme, sevilme, kutlama animasyonları
-- [ ] Three.js prototipinde dokunma, sürükle-bırak ve kamera
+### FAZ 2 — Gerçek 3D pilot [TEKNİK PROTOTİP ÜRETİLDİ; TESTTE]
+- **28.10.2026:** Bağımsız `pilot-3d/` Three.js prototipi ve özgün `assets/characters/pati/pati_v01.glb` (11 bone, 6 animasyon, embedded texture) PR #1 geliştirme dalına kaydedildi; [ücretsiz CI başarılı](https://github.com/burhan-kar/mete-kesif-adasi-v2/actions/runs/40677305473). Prosedürel teknik model profesyonel görsel kalite kabulünü geçmez; Blender, canlı tarayıcı, Android ve iOS testleri **bekliyor**.
+- [x] Köpeğin GLB/GLTF **teknik prototip** modeli (ikili yapı, kemik, materyal, texture CI PASS; 3D görsel kalite ayrıca TESTTE)
+- [x] Idle, mutlu, yıkanma, beslenme, sevilme, kutlama animasyon kanalları (GLB CI PASS; deformasyon/gerçek oynanış TESTTE)
+- [ ] Three.js prototipinde dokunma, sürükle-bırak ve kamera — **dokunma/bakım buton kodu var; sürükle-bırak ve tarayıcı QA henüz tamamlanmadı**
 - [ ] Düşük/orta seviye mobil cihaz testi ve 2D fallback
 **Kabul:** Yüksek kaliteli görsel görünüm, çalışır animasyon ve yanıt veren etkileşim. Hedef test bütçesi: düşük telefonlarda 30 fps, orta segmentte 60 fps hedefi; ilk yükleme ve bellek ölçülerek belirlenecek.
 
