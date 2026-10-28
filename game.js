@@ -86,10 +86,30 @@ artPalm(45,285,.9);artPalm(902,303,.82);
 for(let i=0;i<26;i++){const x=75+(i*137)%810,y=340+(i*71)%190;artFlower(x,y,[0xff9fbd,0xffe18a,0xe0a6f5,0xffffff][i%4],.65+(i%3)*.18)}
 }
 function create(){scene=this;showMap()}
-function showMap(){clear();active='map';backdrop();ellipse(480,395,830,360,0xeed18b);ellipse(480,380,800,340,0x8cda85);ellipse(480,390,730,260,0xb2e59c);ellipse(485,570,890,120,0x31c9e0,.65);
-head("METE'NİN KEŞİF ADASI 2.0");text(480,89,'Bugün hangi dünyayı keşfedeceğiz?',22,'#5a7152');
-for(let i=0;i<worlds.length;i++){const w=worlds[i];ellipse(w.x,w.y+46,194,50,0x385d41,.17);rect(w.x,w.y,193,125,w.color,24);stroke(w.x,w.y,193,125,0xffffff,24,6);emoji(w.x,w.y-28,w.icon,52);text(w.x,w.y+19,w.name,21,'#583d31');text(w.x,w.y+45,w.sub,18,'#583d31');const z=add(scene.add.zone(w.x,w.y,195,130).setInteractive({useHandCursor:true}));z.on('pointerdown',()=>openWorld(w.id));scene.tweens.add({targets:z,scale:1.03,duration:1200,repeat:-1,yoyo:true})}
-text(480,583,'Bir dünyaya dokun ve oyuna başla!',18,'#286c78')}
+function showMap(){
+clear();active='map';backdrop();
+ellipse(480,395,830,360,0xeed18b);
+ellipse(480,380,800,340,0x8cda85);
+ellipse(480,390,730,260,0xb2e59c);
+ellipse(485,570,890,120,0x31c9e0,.65);
+head("METE'NİN KEŞİF ADASI 2.0");
+text(480,89,'Bugün hangi dünyayı keşfedeceğiz?',22,'#5a7152');
+const keys={pet:'puppy',farm:'cow',forest:'fox',sea:'dolphin',vet:'rabbit'};
+for(let i=0;i<worlds.length;i++){
+ const w=worlds[i],wins=progress.completed[w.id]||0;
+ ellipse(w.x,w.y+52,198,48,0x385d41,.17);
+ rect(w.x,w.y,195,142,w.color,25);
+ stroke(w.x,w.y,195,142,0xffffff,25,6);
+ const mascot=add(scene.add.image(w.x,w.y-29,keys[w.id]).setDisplaySize(91,91));
+ scene.tweens.add({targets:mascot,y:w.y-34,angle:i%2?3:-3,duration:1100+i*180,repeat:-1,yoyo:true,ease:'Sine.easeInOut'});
+ text(w.x,w.y+23,w.name,20,'#583d31');
+ text(w.x,w.y+47,w.sub,17,'#583d31');
+ if(wins>0){rect(w.x+76,w.y-61,56,35,0xffe68a,15);text(w.x+76,w.y-61,'⭐'+wins,16,'#8a6223')}
+ const z=add(scene.add.zone(w.x,w.y,195,143).setInteractive({useHandCursor:true}));
+ z.on('pointerdown',()=>{playTone('tap');openWorld(w.id)});
+}
+text(480,583,'Bir dünyaya dokun ve oyuna başla!',18,'#286c78');
+}
 function openWorld(id){if(id==='pet')petWorld();if(id==='farm')farmWorld();if(id==='forest')forestWorld();if(id==='sea')seaWorld();if(id==='vet')vetWorld()}
 function frame(title){clear();active=title;backdrop();head(title);button(78,105,115,58,0x65c7ef,'⬅️','HARİTA',showMap);rect(480,530,610,76,0xffffff,20,.9)}
 function petWorld(){
