@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+<title id="title">Pati — dört açılı karakter konsept paftası v0.1</title>
+<desc id="desc">Özgün köpek maskotu Pati: ön, sol profil, arka ve üç çeyrek taslak referans görünümü. Bu çizim 2D vektör taslaktır, 3D GLB model değildir.</desc>
+<defs>
+  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#EDF9FF"/><stop offset="1" stop-color="#FFF7E7"/></linearGradient>
+  <linearGradient id="caramel" x1="0" y1="0" x2=".95" y2="1"><stop stop-color="#FAD29A"/><stop offset=".46" stop-color="#F5B66E"/><stop offset="1" stop-color="#DE8D4C"/></linearGradient>
+  <linearGradient id="caramelSide" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8C786"/><stop offset="1" stop-color="#CB7E42"/></linearGradient>
+  <linearGradient id="cream" x1=".12" x2="1" y1="0" y2="1"><stop stop-color="#FFFDF4"/><stop offset="1" stop-color="#F1DAB9"/></linearGradient>
+  <radialGradient id="eye" cx=".36" cy=".25"><stop stop-color="#6D4034"/><stop offset=".8" stop-color="#3E2425"/><stop offset="1" stop-color="#2A1A1B"/></radialGradient>
+  <linearGradient id="nose" y1="0" y2="1" x1="0" x2="1"><stop stop-color="#70504B"/><stop offset="1" stop-color="#38292C"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="9"/></filter>
+  <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#B1D8D7" opacity=".38"/></pattern>
+  <style>
+    text{font-family:Verdana,Arial,sans-serif;fill:#385061}
+    .panel{fill:#FFFFFF;stroke:#DAEBEE;stroke-width:3}
+    .outline{stroke:#AB704A;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+    .label{font-size:26px;font-weight:700}
+    .sub{font-size:17px}
+    .guide{stroke:#B5DADD;stroke-width:2;stroke-dasharray:8 12;opacity:.65}
+  </style>
+</defs>
+<rect width="1600" height="980" fill="url(#sky)"/>
+<rect width="1600" height="980" fill="url(#dots)"/>
+<text x="76" y="81" font-size="48" font-weight="800">PATİ</text>
+<text x="236" y="78" font-size="29" font-weight="700" fill="#7A9BA5">|  DÖRT AÇILI KARAKTER REFERANSI</text>
+<text x="79" y="117" font-size="20">Mete'nin Keşif Adası 3.0 · Bakım Merkezi · sürüm 0.1 · 28.10.2026</text>
+<rect x="1160" y="45" rx="24" width="367" height="72" fill="#FFE6A7"/>
+<text x="1183" y="74" font-weight="700" font-size="18" fill="#7E4F20">TASARIM İNCELEMESİNDE</text>
+<text x="1183" y="101" font-size="17" fill="#7E4F20">2D referans / GLB değildir</text>
+<g>
+<rect class="panel" x="43" y="147" width="365" height="674" rx="26"/>
+<rect class="panel" x="426" y="147" width="365" height="674" rx="26"/>
+<rect class="panel" x="809" y="147" width="365" height="674" rx="26"/>
+<rect class="panel" x="1192" y="147" width="365" height="674" rx="26"/>
+</g>
+<g fill="none">
+  <path class="guide" d="M225 174V736M609 174V736M991 174V736M1375 174V736"/>
+  <path class="guide" d="M64 692H387M445 692H772M829 692H1154M1213 692H1537"/>
+</g>
+<!-- FRONT, stylized 2D concept -->
+<g transform="translate(58 166)">
+  <ellipse cx="169" cy="548" rx="122" ry="25" fill="#7DA0A6" opacity=".28" filter="url(#shadow)"/>
+  <path d="M111 351 Q79 413 86 476 Q87 509 126 512 L232 512 Q269 496 265 460 Q258 385 227 349Z" fill="url(#caramelSide)" class="outline"/>
+  <ellipse cx="170" cy="431" rx="62" ry="83" fill="url(#cream)"/>
+  <path d="M129 371 Q170 384 210 369 Q194 417 169 448 Q142 419 129 371Z" fill="#FFF9E9"/>
+  <ellipse cx="110" cy="518" rx="46" ry="27" fill="url(#caramel)" class="outline"/>
+  <ellipse cx="237" cy="518" rx="45" ry="27" fill="url(#caramel)" class="outline"/>
+  <path d="M102 207 Q43 150 58 101 Q66 77 90 97 Q111 114 131 152" fill="#B46E48" class="outline"/>
+  <path d="M244 205 Q300 159 288 108 Q282 81 260 97 Q238 114 226 154" fill="#E49C5A" class="outline"/>
+  <path d="M105 207 Q75 167 83 134 Q94 126 124 183" fill="#D99469"/>
+  <path d="M247 207 Q273 172 268 139 Q258 129 229 184" fill="#F5C082"/>
+  <ellipse cx="175" cy="242" rx="134" ry="143" fill="url(#caramel)" class="outline"/>
+  <ellipse cx="126" cy="264" rx="38" ry="43" fill="#FFF0D8"/>
+  <ellipse cx="227" cy="263" rx="38" ry="43" fill="#FFF0D8"/>
+  <ellipse cx="132" cy="254" rx="22" ry="31" fill="url(#eye)"/>
+  <ellipse cx="220" cy="254" rx="22" ry="31" fill="url(#eye)"/>
+  <circle cx="125" cy="244" r="8" fill="#FFFDF9"/><circle cx="214" cy="245" r="8" fill="#FFFDF9"/>
+  <circle cx="142" cy="269" r="4" fill="#FFFDF9" opacity=".7"/><circle cx="230" cy="269" r="4" fill="#FFFDF9" opacity=".7"/>
+  <path d="M129 306 Q173 275 222 305 Q257 342 228 369 Q177 394 123 369 Q93 345 129 306Z" fill="url(#cream)"/>
+  <path d="M150 319 Q171 308 196 320 Q197 341 177 344 Q153 341 150 319Z" fill="url(#nose)"/>
+  <path d="M175 343V356 M175 356 Q154 374 139 357 M175 356 Q196 374 210 357" fill="none" stroke="#8C5D51" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="92" cy="322" rx="19" ry="12" fill="#E78E83" opacity=".55"/><ellipse cx="254" cy="322" rx="19" ry="12" fill="#E78E83" opacity=".55"/>
+</g>
+<!-- LEFT SIDE PROFILE; nose points right -->
+<g transform="translate(429 166)">
+  <ellipse cx="181" cy="546" rx="143" ry="25" fill="#7DA0A6" opacity=".28" filter="url(#shadow)"/>
+  <path d="M82 408 Q13 390 26 333 Q32 311 48 340 Q39 372 107 377" fill="none" stroke="#C5844C" stroke-width="35" stroke-linecap="round"/>
+  <path d="M22 332 Q32 317 44 339" fill="none" stroke="#F8E9CF" stroke-width="20" stroke-linecap="round"/>
+  <path d="M83 350 Q153 314 226 346 Q272 391 254 470 L105 470 Q79 438 83 350Z" fill="url(#caramelSide)" class="outline"/>
+  <path d="M206 358 Q245 373 248 450 L223 463 Q198 409 206 358Z" fill="url(#cream)"/>
+  <path d="M115 440Q94 485 99 513" fill="none" stroke="#C98B51" stroke-width="42" stroke-linecap="round"/>
+  <path d="M227 441Q243 481 235 517" fill="none" stroke="#E5A765" stroke-width="45" stroke-linecap="round"/>
+  <ellipse cx="99" cy="517" rx="35" ry="20" fill="url(#caramel)" class="outline"/>
+  <ellipse cx="235" cy="517" rx="40" ry="20" fill="url(#caramel)" class="outline"/>
+  <path d="M163 177 Q124 107 141 91 Q163 73 191 147" fill="#B9784B" class="outline"/>
+  <ellipse cx="206" cy="242" rx="100" ry="139" fill="url(#caramel)" class="outline"/>
+  <path d="M244 270 Q293 280 320 314 Q329 351 284 358 L237 342Z" fill="url(#cream)" class="outline"/>
+  <path d="M302 298 Q323 302 322 319 Q308 332 289 316Z" fill="url(#nose)"/>
+  <ellipse cx="222" cy="250" rx="20" ry="30" fill="url(#eye)"/>
+  <ellipse cx="217" cy="239" rx="8" ry="9" fill="white"/>
+  <path d="M287 338 Q278 363 258 354" fill="none" stroke="#8C5D51" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="243" cy="303" rx="19" ry="11" fill="#E78E83" opacity=".48"/>
+</g>
+<!-- BACK; face markings absent, tail cream tip visible -->
+<g transform="translate(815 166)">
+  <ellipse cx="174" cy="548" rx="126" ry="25" fill="#7DA0A6" opacity=".28" filter="url(#shadow)"/>
+  <path d="M91 353 Q59 433 76 496 Q92 519 260 496 Q285 434 246 351Z" fill="url(#caramelSide)" class="outline"/>
+  <ellipse cx="166" cy="409" rx="59" ry="73" fill="#D58D51" opacity=".62"/>
+  <path d="M203 432 Q294 386 295 332 Q290 309 278 332 Q259 372 206 377" fill="none" stroke="#C5824B" stroke-width="37" stroke-linecap="round"/>
+  <path d="M287 336 Q297 323 294 308" fill="none" stroke="#FAE8CC" stroke-width="23" stroke-linecap="round"/>
+  <ellipse cx="108" cy="514" rx="46" ry="23" fill="url(#caramel)" class="outline"/>
+  <ellipse cx="230" cy="514" rx="46" ry="23" fill="url(#caramel)" class="outline"/>
+  <path d="M101 197 Q59 152 69 95 Q84 78 103 111 L133 161" fill="#B67347" class="outline"/>
+  <path d="M227 197 Q276 146 263 100 Q251 81 234 110 L201 164" fill="#E3A05F" class="outline"/>
+  <ellipse cx="166" cy="243" rx="127" ry="142" fill="url(#caramel)" class="outline"/>
+  <path d="M85 226 Q89 166 129 141" fill="none" stroke="#FFDEAB" stroke-width="11" stroke-linecap="round" opacity=".4"/>
+  <path d="M208 154 Q247 166 251 230" fill="none" stroke="#CE864D" stroke-width="12" stroke-linecap="round" opacity=".38"/>
+</g>
+<!-- THREE QUARTER -->
+<g transform="translate(1198 166)">
+  <ellipse cx="178" cy="548" rx="130" ry="25" fill="#7DA0A6" opacity=".28" filter="url(#shadow)"/>
+  <path d="M83 404 Q25 384 45 343" fill="none" stroke="#C88750" stroke-width="30" stroke-linecap="round"/>
+  <path d="M45 342 Q37 331 45 326" fill="none" stroke="#FFF2D7" stroke-width="20" stroke-linecap="round"/>
+  <path d="M95 341 Q167 314 236 359 Q282 409 250 483 L100 486 Q79 430 95 341Z" fill="url(#caramelSide)" class="outline"/>
+  <ellipse cx="207" cy="417" rx="49" ry="76" fill="url(#cream)" transform="rotate(-11 207 417)"/>
+  <ellipse cx="124" cy="512" rx="47" ry="27" fill="url(#caramel)" class="outline"/>
+  <ellipse cx="237" cy="515" rx="46" ry="27" fill="url(#caramel)" class="outline"/>
+  <path d="M126 180 Q82 108 100 92 Q117 77 155 152" fill="#B77349" class="outline"/>
+  <path d="M254 185 Q294 156 290 108 Q277 86 258 123 L237 159" fill="#ECA665" class="outline"/>
+  <path d="M112 201 Q105 164 117 148" fill="none" stroke="#E7A17E" stroke-width="16" stroke-linecap="round"/>
+  <ellipse cx="190" cy="244" rx="125" ry="142" fill="url(#caramel)" class="outline" transform="rotate(-10 190 244)"/>
+  <ellipse cx="166" cy="257" rx="33" ry="40" fill="#FFF3DB"/>
+  <ellipse cx="241" cy="258" rx="29" ry="37" fill="#FFF1D7"/>
+  <ellipse cx="170" cy="255" rx="20" ry="30" fill="url(#eye)"/>
+  <ellipse cx="243" cy="252" rx="17" ry="27" fill="url(#eye)"/>
+  <circle cx="164" cy="245" r="8" fill="white"/><circle cx="238" cy="242" r="7" fill="white"/>
+  <path d="M166 310 Q230 284 273 310 Q298 349 256 370 Q200 389 159 365 Q137 340 166 310Z" fill="url(#cream)"/>
+  <path d="M218 316 Q236 312 252 322 Q254 340 237 344 Q221 339 218 316Z" fill="url(#nose)"/>
+  <path d="M238 346 Q233 365 215 364 M238 346Q254 364 265 355" fill="none" stroke="#8C5D51" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="147" cy="324" rx="19" ry="13" fill="#E78E83" opacity=".45"/>
+</g>
+<g text-anchor="middle">
+  <text class="label" x="225" y="751">ÖN</text><text class="sub" x="225" y="783">İki göz • krem göğüs</text>
+  <text class="label" x="608" y="751">SOL PROFİL</text><text class="sub" x="608" y="783">Burun sağa • kavisli kuyruk</text>
+  <text class="label" x="991" y="751">ARKA</text><text class="sub" x="991" y="783">Yüz işareti yok • krem kuyruk ucu</text>
+  <text class="label" x="1375" y="751">3/4 AÇI</text><text class="sub" x="1375" y="783">Yüz ve göğüs işaretleri tutarlı</text>
+</g>
+<rect x="43" y="841" width="1514" height="107" rx="25" fill="#FFFFFF" stroke="#DAEBEE" stroke-width="3"/>
+<g transform="translate(75 870)">
+<circle cx="15" cy="19" r="14" fill="#F5B66E"/><text x="39" y="26" font-size="19" font-weight="700">Altın karamel</text>
+<circle cx="277" cy="19" r="14" fill="#FFF3DB" stroke="#E7D7BA"/><text x="300" y="26" font-size="19" font-weight="700">Krem işaretler</text>
+<circle cx="553" cy="19" r="14" fill="#B77349"/><text x="576" y="26" font-size="19" font-weight="700">Sol kulak koyu</text>
+<circle cx="831" cy="19" r="14" fill="#3E2425"/><text x="855" y="26" font-size="19" font-weight="700">Sıcak kahverengi göz</text>
+<text x="0" y="62" font-size="17" fill="#5D7584">Kaynak: özgün, bu proje için üretilmiş vektör taslak. Önce sanat onayı; ardından Blender rig/GLB üretimi ve mobil test.</text>
+</g>
+</svg>
