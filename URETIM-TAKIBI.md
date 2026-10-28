@@ -25,11 +25,22 @@ Güncelleme: 2026-10-28
 - **Maliyet ve kaynak:** 0 TL; dış içerik/abonelik/çocuk verisi kullanılmadı. Bu dosya **gerçek 3D karakter değil**, yalnızca 2D üretim referansıdır.
 - **Sonraki blokaj:** Karakter tasarım onayı; ardından Blender/GLB, animasyon ve gerçek cihaz ölçümleri. Onay almadan premium kalite veya pilot tamamlandı demiyoruz.
 
+## 28.10.2026 — P0 gerçek GLB ve ayrı bakım pilotu (TESTTE; GLB CI PASS)
+- **Görev:** Ücretsiz gerçek 3D Pati prototipi ve bağımsız Three.js sahnesi; profesyonel son model iddiası yok.
+- **Kaynak dosya:** `scripts/generate-pati-glb.mjs` (standart Node.js; tekrarlanabilir, dış model/ücretli API yok).
+- **Gerçek ikili varlık:** `assets/characters/pati/pati_v01.glb` — **570.520 bayt**, 11 eklemli iskelet, 10 materyal grubu, yerleşik prosedürel PNG doku, 6 klip (Idle/Happy/Wash/Feed/Pet/Celebrate).
+- **Pilot ve test:** `pilot-3d/index.html`, `pilot-3d/pilot.js`, `scripts/validate-pati-glb.mjs`; `docs/reports/PATI-3D-PILOT-QA-2026-10-28.md`; `docs/licenses/PATI-3D-PILOT-V01.md`.
+- **Otomatik kanıt:** [GitHub Actions run 40677305473](https://github.com/burhan-kar/mete-kesif-adasi-v2/actions/runs/40677305473) **SUCCESS** — generator açıldı, GLB gerçek binary üretildi, skin/texture/animasyon doğrulandı, pilot JS sözdizimi ve önceki konsept denetimi geçti. GLB commit: `b0dbd183c41084b594ba1b3f8e970fe6e7a247a2`.
+- **Uzman kontrol kapıları:** Teknik GLB ikili/yapı **PASS**; sanat **TESTTE** (yumuşak mesh ve cilalı profesyonel stil yok); animasyon **TESTTE** (gerçek render/deformasyon); çocuk gelişimi tasarım **PASS / kullanıcı testi bekliyor**; ses **TESTTE** (cihaza bağlı Web Speech); QA güvenlik **PASS / mobil FPS-bellek TESTTE**.
+- **Önemli sınır:** Blender sistemde kurulu olmadığından gerçek Blender rig/UV kontrolü yapılmadı; Android Chrome, iOS Safari ve Windows Chrome ekran görüntüsü, ses, performans ve 5 dünya regresyon testleri henüz yapılmadı. GitHub Pages `main` hâlâ eski Phaser oyununu sunar; yeni pilot yalnız geliştirme dalındadır.
+- **Maliyet / veri:** 0 TL yeni harcama, Three.js MIT ve özgün kod/asset; reklam, analiz, çocuk verisi veya ücretli servis yok.
+- **Sonraki adım:** Ayrı pilotun gerçek tarayıcı/telefon testi; kaliteli sanat üretim standardı ve Blender deformasyon değerlendirmesi; ardından kontrollü ana oyuna entegrasyon.
+
 ## Sırada (öncelik sıralı)
 - [ ] P0 Köpek 3D karakter konseptini 4 açıdan tutarlı üret ve onayla — **taslak üretildi, TESTTE; tasarım onayı bekleniyor**
-- [ ] P0 GLB model üret, modelin gerçek kullanılabilirliğini test et
+- [x] P0 GLB dosyasını üret ve ikili/skin/animasyon yapısını test et — **GitHub CI PASS**; gerçek tarayıcı kullanılabilirlik testi ayrıca **TESTTE**
 - [ ] P0 Blender'da mesh/UV/rig/topoloji/animasyon kontrolü
-- [ ] P0 Three.js küçük pilotu oluştur, animasyonları test et
+- [ ] P0 Three.js küçük pilotu oluştur, animasyonları test et — **pilot kodu commit edildi, statik JS CI PASS; tarayıcı görsel/animasyon TESTTE**
 - [ ] P0 Orta seviye Android + iPhone Safari gerçek cihaz testi
 - [ ] P1 Tam hayvan bakım mini oyunu 3D pilot entegrasyonu
 - [ ] P1 Türkçe yönerge ve özel ses efektleri
