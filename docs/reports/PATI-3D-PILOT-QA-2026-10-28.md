@@ -21,3 +21,9 @@
 
 ## Sıradaki kalite kapısı
 Android Chrome ve iOS Safari gerçek cihaz görüntü testi + Blender model/animasyon geçişi, görsel stil ve çocuk kullanıcılı gözlem. Beş bölümlü Phaser v2'yi değiştirmeden yürütülür. Ücretli işlem yok.
+
+## 2D yedek mod kalite kanıtı (28.10.2026)
+- [Ücretsiz GitHub Actions çalışması #40677878489](https://github.com/burhan-kar/mete-kesif-adasi-v2/actions/runs/40677878489): **SUCCESS**.
+- GLB ikili dosyası, iskelet/animasyon/doku erişicileri ve pilot JavaScript kontrolü başarılı.
+- `scripts/validate-pati-fallback.mjs` Node sanal DOM testinde 2D yedek akışında Yıka → Besle → Sev ve 0/3→3/3 yıldız durumu, düğme engelleme ve ses kontrolü kodu doğrulandı.
+- **Sınırlama:** Yerel Chromium HTTP/file URL erişimi bu ortamda idari olarak engellendi. Bu nedenle gerçek görüntü testleri ve 3D animasyon görsel render testi **YAPILMADI**; mobil FPS/UX hâlâ TESTTE.
