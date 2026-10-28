@@ -1,0 +1,28 @@
+name: Pati pilot quality gates (free)
+on:
+  pull_request:
+    paths:
+      - "pilot-3d/**"
+      - "scripts/validate-pati-glb.mjs"
+      - "scripts/validate-pati-fallback.mjs"
+      - "assets/characters/pati/**"
+      - ".github/workflows/pati-pilot-static-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot-structural-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify GLB rig, clips and embedded texture
+        run: node scripts/validate-pati-glb.mjs
+      - name: Verify JS syntax and playable offline fallback behavior
+        run: |
+          node --check pilot-3d/pilot.js
+          node scripts/validate-pati-fallback.mjs
+      - name: Preserve existing concept quality
+        run: node scripts/validate-pati-concept.mjs
