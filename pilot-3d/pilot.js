@@ -1,6 +1,7 @@
 /** Pati pilot: original skinned GLB, Three.js MIT. No data collection or paid APIs. */
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+window.__patiPilotModuleReady=true;
 const $=id=>document.getElementById(id),buttons=[...document.querySelectorAll('[data-task]')];
 const tasks=[['Wash',"Pati'yi yıkayalım!",'Pati tertemiz oldu!'],['Feed',"Pati'ye mama verelim!",'Pati karnını doyurdu!'],['Pet',"Pati'yi sevelim!",'Pati sevgini hissetti!']];
 let step=0,busy=false,mixer,actions={},active,model,camera,renderer,scene,clock,soundOff=true,ctx;
