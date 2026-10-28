@@ -16,8 +16,17 @@ Güncelleme: 2026-10-28
 - ChatGPT: Mete Game Studio AI v0.1.0, özel plugin, dosyaları tekrar listelenerek doğrulandı.
 - Bu çalışma sırasında herhangi bir üçüncü taraf ücretli abonelik açılmadı ve gerçek 3D GLB karakter henüz üretilmedi.
 
+## 28.10.2026 — P0 Pati dört açı referansı (TESTTE)
+- **Görev:** Pati'nin dört görünümünü özgün, değiştirilebilir vektör konsept olarak üretmek (FAZ 1 taslak).
+- **Gerçek çıktı:** `assets/concepts/pati-model-sheet-v01.svg` (ön, sol profil, arka, 3/4); `docs/licenses/PATI-KONSEPT-V01.md`; `docs/reports/PATI-KONSEPT-QA-2026-10-28.md`; `scripts/validate-pati-concept.mjs` ve GitHub Actions kontrolü.
+- **GitHub geliştirme dalı:** `studio/p0-pati-four-view-concept-2026-10-28` — ana Phaser oyununun `index.html` / `game.js` dosyaları değiştirilmedi.
+- **Kabul kanıtı:** 4 ayrı açı, SVG başlık/açıklama, renk/morfoloji anahtarı ve bağımlılıksız test kaynağı commit edildi; CI ve cihazda görsel onay sonucu raporlanana kadar **TESTTE**.
+- **Roller:** Teknik TESTTE, sanat TESTTE, animasyon BLOKE (rig/GLB yok), çocuk gelişimi TESTTE, ses UYGULANMAZ, QA TESTTE.
+- **Maliyet ve kaynak:** 0 TL; dış içerik/abonelik/çocuk verisi kullanılmadı. Bu dosya **gerçek 3D karakter değil**, yalnızca 2D üretim referansıdır.
+- **Sonraki blokaj:** Karakter tasarım onayı; ardından Blender/GLB, animasyon ve gerçek cihaz ölçümleri. Onay almadan premium kalite veya pilot tamamlandı demiyoruz.
+
 ## Sırada (öncelik sıralı)
-- [ ] P0 Köpek 3D karakter konseptini 4 açıdan tutarlı üret ve onayla
+- [ ] P0 Köpek 3D karakter konseptini 4 açıdan tutarlı üret ve onayla — **taslak üretildi, TESTTE; tasarım onayı bekleniyor**
 - [ ] P0 GLB model üret, modelin gerçek kullanılabilirliğini test et
 - [ ] P0 Blender'da mesh/UV/rig/topoloji/animasyon kontrolü
 - [ ] P0 Three.js küçük pilotu oluştur, animasyonları test et
