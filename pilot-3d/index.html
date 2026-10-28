@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#b8eaff"><title>Pati 3D Bakım Merkezi · Mete'nin Keşif Adası</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,Arial,sans-serif;color:#295169}body{background:linear-gradient(125deg,#bceaff,#fff4d8)}main{max-width:1000px;margin:auto;min-height:100dvh;padding:12px;display:flex;flex-direction:column;gap:12px}
+header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}h1{font-size:clamp(19px,3vw,29px);margin:0}.back{font-weight:750;color:#236482}.back:focus-visible,button:focus-visible{outline:4px solid #255eb4;outline-offset:4px}
+.stage{flex:1;position:relative;min-height:290px;max-height:65dvh;border:3px solid white;border-radius:28px;background:radial-gradient(ellipse at 55% 25%,#fff8e6,#d5f2dc 62%,#8ed8b4);overflow:hidden;box-shadow:0 12px 35px #367b8731}
+#viewport,#viewport canvas{position:absolute;inset:0;width:100%;height:100%}#viewport{touch-action:pan-y}.fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;background:#e8f6e2;padding:12px;text-align:center;gap:7px}.fallback.visible{display:flex}.fallback img{max-height:58%;max-width:70%}
+.info{position:absolute;left:12px;right:12px;top:12px;display:flex;justify-content:space-between;gap:9px;pointer-events:none}.info span{background:#fffef1eb;border-radius:23px;padding:10px;font-weight:800;font-size:clamp(14px,3vw,20px)}#notice{position:absolute;bottom:12px;left:12px;border-radius:23px;padding:10px 15px;background:#fffdf4eb;font-weight:700}
+.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.task{border:3px solid #fff;background:#fff5dc;color:#27526a;border-radius:23px;min-height:88px;font-weight:800;font-size:clamp(16px,3vw,23px);cursor:pointer;box-shadow:0 4px 0 #a8bfca}.task span{display:block;font-size:26px}.task:disabled{opacity:.6;cursor:not-allowed}.task.done{background:#d1f8d3;opacity:1}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.actions p{margin:0;font-weight:700}.simple{border:2px solid white;background:#fffbea;color:#27526a;border-radius:18px;min-height:64px;min-width:124px;font-weight:800;cursor:pointer}footer{font-size:12px;text-align:center;opacity:.8}
+@media(max-width:540px){main{gap:8px;padding:8px}.stage{max-height:57dvh}.task{border-radius:17px;min-height:78px}.info{left:7px;right:7px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+</head><body><main>
+<header><a class="back" href="../index.html">← Keşif Adası</a><h1>🐶 Pati Bakım Merkezi · 3D</h1><button class="simple" id="sound" aria-pressed="false">🔇 Ses kapalı</button></header>
+<section class="stage" aria-label="Pati üç boyutlu oyun sahnesi">
+ <div id="viewport"></div>
+ <div id="fallback" class="fallback" role="status"><img src="../assets/puppy.svg" alt="Sevimli Pati köpek resmi"><strong>2D güvenli görünüm</strong><span>3D açılamadı; görevleri düğmelerle yapabilirsin.</span></div>
+ <div class="info"><span id="mission" aria-live="polite">Pati'yi yıkayalım!</span><span id="score">⭐ 0/3</span></div><div id="notice" aria-live="polite">Bakım aracını seç.</div>
+</section>
+<div class="controls" aria-label="Bakım görevleri"><button class="task" data-task="Wash"><span aria-hidden="true">🧽</span>Yıka</button><button class="task" data-task="Feed"><span aria-hidden="true">🥕</span>Besle</button><button class="task" data-task="Pet"><span aria-hidden="true">💗</span>Sev</button></div>
+<div class="actions"><p id="help">Süngere dokun. Hata yaparsan ceza yok!</p><button class="simple" id="repeat">🔁 Tekrar dinle</button></div>
+<footer>Özgün teknik GLB prototipi · Hesap, reklam, izleme, çocuk verisi yok · Three.js MIT</footer>
+</main><script type="module" src="./pilot.js"></script></body></html>
