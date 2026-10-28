@@ -22,4 +22,20 @@ header{display:flex;justify-content:space-between;align-items:center;flex-wrap:w
 <div class="controls" aria-label="Bakım görevleri"><button class="task" data-task="Wash"><span aria-hidden="true">🧽</span>Yıka</button><button class="task" data-task="Feed"><span aria-hidden="true">🥕</span>Besle</button><button class="task" data-task="Pet"><span aria-hidden="true">💗</span>Sev</button></div>
 <div class="actions"><p id="help">Süngere dokun. Hata yaparsan ceza yok!</p><button class="simple" id="repeat">🔁 Tekrar dinle</button></div>
 <footer>Özgün teknik GLB prototipi · Hesap, reklam, izleme, çocuk verisi yok · Three.js MIT</footer>
-</main><script type="module" src="./pilot.js"></script></body></html>
+</main><script type="module" src="./pilot.js"></script><script>
+// Offline CDN fallback: keep care tasks playable without Three.js or GLB imports.
+setTimeout(function(){
+ if(window.__patiPilotModuleReady)return;
+ window.__patiFallbackActive=true;
+ const $=id=>document.getElementById(id);
+ const fallback=$('fallback');fallback.classList.add('visible');fallback.style.zIndex='2';
+ const words=[["Pati'yi yıkayalım!",'Pati tertemiz oldu!'],["Pati'ye mama verelim!",'Pati karnını doyurdu!'],["Pati'yi sevelim!",'Pati sevgini hissetti!']];
+ const buttons=[...document.querySelectorAll('[data-task]')];let step=0,muted=true;
+ function say(t){if(muted||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='tr-TR';u.volume=.6;u.rate=.85;speechSynthesis.speak(u)}catch{}}
+ function render(){const finished=step>=3;$('score').textContent='⭐ '+step+'/3';$('mission').textContent=finished?'Yaşasın! Pati mutlu!':words[step][0];$('help').textContent=finished?'Tüm görevler tamamlandı.':'Sıradaki bakım aracını seç.';buttons.forEach((b,i)=>{b.disabled=i!==step||finished;b.classList.toggle('done',i<step)})}
+ buttons.forEach((button,i)=>button.addEventListener('click',()=>{if(i!==step)return;const message=words[step][1];step++;render();$('notice').textContent=message;say(message)}));
+ $('sound').addEventListener('click',()=>{muted=!muted;$('sound').textContent=muted?'🔇 Ses kapalı':'🔊 Ses açık';$('sound').setAttribute('aria-pressed',String(!muted));if(!muted)say($('mission').textContent);else try{speechSynthesis.cancel()}catch{}});
+ $('repeat').addEventListener('click',()=>say($('mission').textContent));
+ $('notice').textContent='2D oyun modu: bakım görevleri çalışıyor.';render();
+},6000);
+</script></body></html>
