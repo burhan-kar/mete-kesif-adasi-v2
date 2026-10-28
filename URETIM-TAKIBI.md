@@ -36,6 +36,13 @@ Güncelleme: 2026-10-28
 - **Maliyet / veri:** 0 TL yeni harcama, Three.js MIT ve özgün kod/asset; reklam, analiz, çocuk verisi veya ücretli servis yok.
 - **Sonraki adım:** Ayrı pilotun gerçek tarayıcı/telefon testi; kaliteli sanat üretim standardı ve Blender deformasyon değerlendirmesi; ardından kontrollü ana oyuna entegrasyon.
 
+## 28.10.2026 — 2D yedek mod ve çocuk bakım akışı QA (PASS: otomatik / TESTTE: gerçek tarayıcı)
+- **Risk düzeltmesi:** Three.js CDN indirmesi başarısız olduğunda boş sayfa yerine 2D Pati görünümü ve çalışır Yıka → Besle → Sev akışı.
+- **Çıktı:** `pilot-3d/index.html` çevrimdışı bağımsız bakım kodu, `pilot-3d/pilot.js` modül hazır işareti, `scripts/validate-pati-fallback.mjs` test senaryosu ve `.github/workflows/pati-pilot-static-qa.yml`.
+- **CI kanıtı:** [GitHub Actions #40677878489](https://github.com/burhan-kar/mete-kesif-adasi-v2/actions/runs/40677878489) **SUCCESS** (GLB rig/clip/texture, pilot JS, 2D akış, 0/3→3/3, ses düğmeleri, konsept kalite testi).
+- **Cihaz sınırı:** Bu ortamda Chromium ağ ve dosya erişimi engellendiği için canlı tarayıcı testi yapılamadı; Windows/Android/iPhone gerçek arayüz testi **TESTTE**. Erişilebilirlik otomatik yapı kontrolleri gerçek kullanıcılı denetimin yerini tutmaz.
+- **Maliyet:** 0 TL; ücretli işlem yok.
+
 ## Sırada (öncelik sıralı)
 - [ ] P0 Köpek 3D karakter konseptini 4 açıdan tutarlı üret ve onayla — **taslak üretildi, TESTTE; tasarım onayı bekleniyor**
 - [x] P0 GLB dosyasını üret ve ikili/skin/animasyon yapısını test et — **GitHub CI PASS**; gerçek tarayıcı kullanılabilirlik testi ayrıca **TESTTE**
