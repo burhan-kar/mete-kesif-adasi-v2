@@ -20,8 +20,8 @@ Güncelleme: 2026-10-28
 - **Görev:** Pati'nin dört görünümünü özgün, değiştirilebilir vektör konsept olarak üretmek (FAZ 1 taslak).
 - **Gerçek çıktı:** `assets/concepts/pati-model-sheet-v01.svg` (ön, sol profil, arka, 3/4); `docs/licenses/PATI-KONSEPT-V01.md`; `docs/reports/PATI-KONSEPT-QA-2026-10-28.md`; `scripts/validate-pati-concept.mjs` ve GitHub Actions kontrolü.
 - **GitHub geliştirme dalı:** `studio/p0-pati-four-view-concept-2026-10-28` — ana Phaser oyununun `index.html` / `game.js` dosyaları değiştirilmedi.
-- **Kabul kanıtı:** 4 ayrı açı, SVG başlık/açıklama, renk/morfoloji anahtarı ve bağımlılıksız test kaynağı commit edildi; CI ve cihazda görsel onay sonucu raporlanana kadar **TESTTE**.
-- **Roller:** Teknik TESTTE, sanat TESTTE, animasyon BLOKE (rig/GLB yok), çocuk gelişimi TESTTE, ses UYGULANMAZ, QA TESTTE.
+- **Kabul kanıtı:** 4 ayrı açı, SVG başlık/açıklama, renk/morfoloji anahtarı ve bağımlılıksız test kaynağı commit edildi; GitHub Actions yapısal testi **SUCCESS** ([run 40658346341](https://github.com/burhan-kar/mete-kesif-adasi-v2/actions/runs/40658346341)); cihazda görsel ve tasarım onayı beklediği için **TESTTE**.
+- **Roller:** Teknik SVG/CI PASS (3D test yok), sanat TESTTE, animasyon BLOKE (rig/GLB yok), çocuk gelişimi TESTTE, ses UYGULANMAZ, QA TESTTE.
 - **Maliyet ve kaynak:** 0 TL; dış içerik/abonelik/çocuk verisi kullanılmadı. Bu dosya **gerçek 3D karakter değil**, yalnızca 2D üretim referansıdır.
 - **Sonraki blokaj:** Karakter tasarım onayı; ardından Blender/GLB, animasyon ve gerçek cihaz ölçümleri. Onay almadan premium kalite veya pilot tamamlandı demiyoruz.
 
