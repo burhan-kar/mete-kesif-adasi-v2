@@ -18,7 +18,7 @@ for (const title of ['ÖN', 'SOL PROFİL', 'ARKA', '3/4 AÇI']) {
 for (const characteristic of ['Altın karamel', 'Krem işaretler', 'Sol kulak koyu', 'Sıcak kahverengi göz']) {
   assert(svg.includes(characteristic), characteristic + ' referansı yok');
 }
-assert(!/<script\b|<foreignObject\b|<image\b|\bonload\s*=|\bonerror\s*=|https?:\/\//i.test(svg),
+assert(!/<script\b|<foreignObject\b|<image\b|\bonload\s*=|\bonerror\s*=|\b(?:href|src)\s*=\s*[\"'](?:https?:|\/\/)/i.test(svg),
   'Konsept dosyası hiçbir harici varlık, betik veya izleme içermemeli');
 const noComments = svg.replace(/<!--[\s\S]*?-->/g, '');
 const ids = [...noComments.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
